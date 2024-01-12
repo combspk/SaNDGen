@@ -8,15 +8,15 @@ The **Null Synthetic Data Generation** application is an R Shiny app developed b
 ## Usage
 1. First, click the "Browse..." button to open the file browser. Select one or more input files to upload to the app.
 <br>
-![Selecting input files](https://github.com/combspk/null-synthetic-data-generation/tree/main/img/1.png)
+![Selecting input files](https://github.com/combspk/null-synthetic-data-generation/tree/main/img/1.png?raw=true)
 
 2. Next, select the output mode.
 <br>
-![Specifying output mode](https://github.com/combspk/null-synthetic-data-generation/tree/main/img/2.png)
+![Specifying output mode](https://github.com/combspk/null-synthetic-data-generation/tree/main/img/2.png?raw=true)
 
 3. For the **Generate synthetic null control samples** mode, you can set the **number of synthetic samples** option to determine the total number of original + synthesized samples to be output.
 <br>
-![Generate synthetic null samples options](https://github.com/combspk/null-synthetic-data-generation/tree/main/img/3.png)
+![Generate synthetic null samples options](https://github.com/combspk/null-synthetic-data-generation/tree/main/img/3.png?raw=true)
 
 4. For the **Generate synthetic null control samples & create expression data files** mode, you can set the following options:
 - **number of synthetic samples** - The total number of original + synthesized samples to be output.
@@ -32,13 +32,13 @@ The **Null Synthetic Data Generation** application is an R Shiny app developed b
 
 6. For the **Manual input** dose input mode, you can click the **Add dose level** button to specify a new dose level as well as the number of repetitions for each level. 
 <br>
-![Options for automatic dose level spacing](https://github.com/combspk/null-synthetic-data-generation/tree/main/img/4.png)
+![Options for automatic dose level spacing](https://github.com/combspk/null-synthetic-data-generation/tree/main/img/4.png?raw=true)
 <br>
-![Options for manual dose level spacing](https://github.com/combspk/null-synthetic-data-generation/tree/main/img/5.png)
+![Options for manual dose level spacing](https://github.com/combspk/null-synthetic-data-generation/tree/main/img/5.png?raw=true)
 
 7. For the **Supplement existing data** mode, you can configure the options similarly to the previous modes to generate new samples for each dose level given one or more input data file(s).
 <br>
-![Options for supplementing existing data](https://github.com/combspk/null-synthetic-data-generation/tree/main/img/6.png)
+![Options for supplementing existing data](https://github.com/combspk/null-synthetic-data-generation/tree/main/img/6.png?raw=true)
 
 8. Press the **GO!** button to start the sample generation process.
 
