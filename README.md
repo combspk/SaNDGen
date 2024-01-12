@@ -8,7 +8,7 @@ The **Null Synthetic Data Generation** application is an R Shiny app developed b
 ## Usage
 1. First, click the "Browse..." button to open the file browser. Select one or more input files to upload to the app.
 <br>
-![Upload input files](https://github.com/combspk/null-synthetic-data-generation/assets/148355901/18473ecb-e44c-4770-868c-6f23379c3aaf)
+![Upload input files](https://github.com/combspk/null-synthetic-data-generation/assets/148355901/18473ecb-e44c-4770-868c-6f23379c3aaf?raw=true)
 
 2. Next, select the output mode.
 <br>
