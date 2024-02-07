@@ -44,7 +44,7 @@ ui <- fluidPage(
                 <ul>
                 <li><b>Generate synthetic null control samples</b>: Generate some number of synthetic samples using the input file. Only one input file is accepted. Input file must contain only control samples: other dose levels are ignored.</li>
                 <li><b>Generate synthetic null control samples & create expression data files</b>: Generate some number of synthetic samples using the input file, take samples and output to expression data files, and arbitrarily assign dose levels. Only one input file is accepted. Input file must contain only control samples: other dose levels are ignored.</li>
-                <li><b>Supplement existing data</b>: Expand the samples in each dose level given one or more input files and randomly sample synthetic data and output to expression data files. May accept multiple input files. Each result file will always contain the original samples in each dose level.</li>
+                <li><b>Supplement existing data</b>: Expand the samples in each dose level given one or more input files and randomly sample synthetic data and output to expression data files. Separate pools of samples are generated for each dose level. Can accept multiple input files as a batch upload. Each result file will always contain the original samples in each dose level alongside the generated samples.</li>
                 </ul>
                 </p>
             ")),
@@ -96,12 +96,6 @@ ui <- fluidPage(
                 )
             ),
             
-            # fluidRow(
-            #     column(12,
-            #            checkboxInput(inputId="input__noneg", label="Do not synthesize negative values (convert to 0)", value=FALSE)
-            #     )
-            # ),
-            # 
             br(),
             fluidRow(
                 column(6,
