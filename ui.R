@@ -96,12 +96,12 @@ ui <- fluidPage(
                 )
             ),
             
-            fluidRow(
-                column(12,
-                       checkboxInput(inputId="input__noneg", label="Do not synthesize negative values (convert to 0)", value=FALSE)
-                )
-            ),
-            
+            # fluidRow(
+            #     column(12,
+            #            checkboxInput(inputId="input__noneg", label="Do not synthesize negative values (convert to 0)", value=FALSE)
+            #     )
+            # ),
+            # 
             br(),
             fluidRow(
                 column(6,

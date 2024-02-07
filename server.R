@@ -316,6 +316,9 @@ server <- function(input, output, session) {
                 } else if(proc_status == 2){ # bad manual dosages
                     showNotification(paste0("Error (", x[["Filename"]], "): bad input file format. Ensure this input file is of the correct format."), type="error")
                     shinyjs::enable("btn__go")
+                } else if(proc_status == 3){ # no null samples provided
+                    showNotification(paste0("Error (", x[["Filename"]], "): No null labels found in input file. You must supply null samples if synthesizing null data."), type="error")
+                    shinyjs::enable("btn__go")
                 }
                 return(proc_status)
             })

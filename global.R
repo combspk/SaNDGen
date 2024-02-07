@@ -92,6 +92,13 @@ parse.file <- function(file, mode, input_mode, manual_input) {
                 }
                 return(NULL)
             })
+            
+            # Fail gracefully if no null samples provided
+            if(is.null(df)){
+                res$err <- 3
+                return(list(res=res, label_id=NULL, label_dose=NULL))
+            }
+            
             df <- df[!vapply(df, is.null, FUN.VALUE=logical(1))]
             df <- data.frame(do.call(cbind, df), stringsAsFactors=FALSE)
         }
@@ -109,8 +116,11 @@ parse.file <- function(file, mode, input_mode, manual_input) {
     res$nprobes <- length(res$probeNames)
     colnames(eD) <- NULL
     rownames(eD) <- NULL
-    res$exprData <- matrix(as.numeric(unlist(eD)), nrow=nrow(eD))
+    
+    res$exprData <- do.call(cbind, lapply(eD, FUN=as.numeric))
+    
     dimnames(res$exprData) <- list(res$probeNames, res$sampleNames)
+    
     res$annoData <- data.frame(label_id=res$probeNames, row.names=res$probenames, stringsAsFactors=FALSE, check.names=FALSE)
     colnames(res$annoData) <- c(label_id)
     return(list(res=res, label_id=label_id, label_dose=label_dose))
@@ -147,7 +157,7 @@ generate_sample_pool <- function(mode, input_mode, param__input_file, param__inp
         NUMBER_OF_TREATMENT_REPLICATES <- param__sample_pool
         PREFIX <- param__output_file_name
         EPSILON <- 1e-8
-        LOWER_LIMIT <- -.Machine$integer.max
+        LOWER_LIMIT <- 0
         UPPER_LIMIT <- .Machine$integer.max
         
         # Posit Connect gets mad if we don't explicitly set TRUE or FALSE and just pass directly from the input for some reason
@@ -177,6 +187,8 @@ generate_sample_pool <- function(mode, input_mode, param__input_file, param__inp
             return(1)
         } else if(iarray$err == 2){ # mangled file
             return(2)
+        } else if(iarray$err == 3){ # no null samples provided
+            return(3)
         }
         
         setProgress(0.5, detail="identifying dose groups")
@@ -184,7 +196,8 @@ generate_sample_pool <- function(mode, input_mode, param__input_file, param__inp
         # Deepak's generation code:
         
         ### Preprocess to identify dose groups and corresponding number of original replicates
-        fD <- table(iarray$phenoData[label_dose])
+        
+        fD <- table(iarray$phenoData[, label_dose])
         
         DOSE_LEVELS <- as.numeric(names(fD)) # these are the names of each dose level in the original input file
         fD <- as.integer(fD) # these are the counts of each dose level (# reps) in the original input file
@@ -214,7 +227,7 @@ generate_sample_pool <- function(mode, input_mode, param__input_file, param__inp
         
         for(d in seq_len(NUMBER_OF_DOSES)) {
             index.o <- which(dose.index == (d - 1))
-            index.i <- which(iarray$phenoData[label_dose] == DOSE_LEVELS[d])
+            index.i <- which(iarray$phenoData[, label_dose] == DOSE_LEVELS[d])
             C.d <- min(sD[d], fD[d])
             oarray$sampleNames[index.o[seq_len(C.d)]] <- iarray$sampleNames[index.i[seq_len(C.d)]]
         }
@@ -224,7 +237,7 @@ generate_sample_pool <- function(mode, input_mode, param__input_file, param__inp
         
         oarray$nsamples <- length(dose.index)
         
-        sL <- split(iarray$sampleNames, iarray$phenoData[label_dose])
+        sL <- split(iarray$sampleNames, iarray$phenoData[, label_dose])
         
         ### Compute dose-wise rate of out of bounds expression for each probe/gene/transcript
         pi.L <- do.call(cbind, lapply(sL, function(y) rowMeans(iarray$exprData[, y, drop=FALSE] <= LOWER_LIMIT)))
@@ -267,11 +280,6 @@ generate_sample_pool <- function(mode, input_mode, param__input_file, param__inp
                 z[is.na(z)] <- 0
                 oarray$exprData[, index.o[m]] <- z
             }
-        }
-        
-        # If "do not synthesize negative values" option is checked, convert all generated values < 0 to just be 0
-        if(param__no_negative == TRUE){
-            oarray$exprData[oarray$exprData < 0] <- 0
         }
         
         setProgress(0.9, detail="writing to file(s)")
