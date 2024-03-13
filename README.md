@@ -1,6 +1,6 @@
 # Synthetic and Null Data Synthesizer (SaNDS)
 
-The **Synthetic and Null Data Synthesizer (SaNDS)** application is an R Shiny app developed by Parker Combs (NIH/NIEHS) and adapted from code by Deepak Mav, PhD (Sciome, LLC) with input from Scott Auerbach, PhD (NIH/NIEHS). Given an input file of a specific format (see examples/Example.txt), the app can:
+The **Synthetic and Null Data Synthesizer (SaNDS)** application is an R Shiny app developed by Parker Combs (NIH/NIEHS) and adapted from code by Deepak Mav, PhD (Sciome, LLC) with input from Scott Auerbach, PhD (NIH/NIEHS). Given an input file of a specific format (see ./examples/ subdirectory), the app can:
 - Generate some number *N* of synthetic null samples based off of the existing null samples **only** in the input file.
 - Generate some number *N* of synthetic null samples based off of the existing null samples **only** in the input file and randomly sample and categorize them into arbitrary dosage levels of size *M<sub>i</sub> ... M<sub>j</sub>* where *M<sub>i</sub>* is the first defined dosage level and *M<sub>j</sub>* is the last defined dosage level.
 - Generate some number *N* of synthetic null samples **for each** dosage level in the input file and randomly sample and categorize them into arbitrary dosage levels of size *M<sub>i</sub> ... M<sub>j</sub>* where *M<sub>i</sub>* is the first defined dosage level and *M<sub>j</sub>* is the last defined dosage level.
