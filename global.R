@@ -22,11 +22,17 @@ library(stringr)
 library(uuid)
 library(zip)
 
+library(report)
+#print(cite_packages())
+
 # Increase file upload size
 options(shiny.maxRequestSize=100*1024^2) 
 
 # Save snapshot of libraries
 #renv::snapshot()
+
+# Number of cores to use when multiprocessing
+N_CORES = 4
 
 # Function to parse input log-transformed expression file
 parse.file <- function(file, mode, input_mode, manual_input) {

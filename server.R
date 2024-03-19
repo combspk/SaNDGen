@@ -324,7 +324,7 @@ server <- function(input, output, session) {
             })
         } else {
             proc_status_list <- apply(reac__uploaded_files$dt, 1, function(x) c(x["Filename"], x["Path"]))
-            proc_status_list <- mclapply(proc_status_list, mc.silent=FALSE, mc.cores=8, function(x){
+            proc_status_list <- mclapply(proc_status_list, mc.silent=FALSE, mc.cores=N_CORES, function(x){
                 
                 # parse out manual input ids
                 manual_input_list <- list()

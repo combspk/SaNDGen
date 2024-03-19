@@ -20,7 +20,7 @@ ui <- fluidPage(
     bsTooltip(id=paste0("input__noneg"), title=paste0("If checked, if the generation algorithm creates samples with negative column values, they will instead be rounded up to 0."), placement="bottom"),
     bsTooltip(id=paste0("btn__add_dose"), title=paste0("Specify a new dosage level with the corresponding number of samples to sample from the population."), placement="bottom"),
     
-    titlePanel("Synthetic Data Generation"),
+    titlePanel("Synthetic and Null Data Generator (SaNDGen)"),
     
     sidebarLayout(
         sidebarPanel(
